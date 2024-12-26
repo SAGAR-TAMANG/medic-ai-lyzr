@@ -15,12 +15,22 @@ from gtts import gTTS
 # Set up OpenAI API key
 load_dotenv()
 
+# import cloudinary
+# import cloudinary.uploader
+# from cloudinary.utils import cloudinary_url
+# # Configuration       
+# cloudinary.config( 
+#     cloud_name = "dz8ajbuaa", 
+#     api_key = "567339758213947", 
+#     api_secret = os.getenv("CLOUDINARY_SECRET"),
+#     secure=True
+# )
+
 def index_poster(request):
     context = {}
     if request.method == 'POST' and 'file' in request.FILES:
         print("INSIDE THE POST")
         uploaded_file = request.FILES['file']
-        fs = FileSystemStorage()
         name = fs.save(uploaded_file.name, uploaded_file)
         url = fs.url(name)
 
@@ -37,9 +47,12 @@ def index_poster(request):
         print("\n Contexts \n", context, "\n")
 
         if file_extension in ('.png', '.jpg', '.jpeg', '.heic', '.webp'):
-            extracted_text = extract_text_from_imageandpdf(name)
+            # upload_result = cloudinary.uploader.upload()
+            # public_id = upload_result['public_id']
+            # transformed_url, _ = cloudinary_url(public_id, transformation=["media_lib_thumb"])
+            extracted_text = extract_text_from_imageandpdf(url)
         elif file_extension == '.pdf':
-            extracted_text = extract_text_from_imageandpdf(name)
+            extracted_text = extract_text_from_imageandpdf(url)
         else:
             extracted_text = 'Not a correct extension'
 
@@ -162,9 +175,10 @@ import requests
 
 api_ocr = os.getenv("OCR_API_KEY")
 
-def extract_text_from_imageandpdf(image_path):
-    print("URL:", f"https://medic-ai-lyzr.feynmanpi.com/media/{image_path}")
-    response = requests.get(f"https://api.ocr.space/parse/imageurl?apikey={api_ocr}&url=https://medic-ai-lyzr.feynmanpi.com/media/{image_path}")
+def extract_text_from_imageandpdf(url):
+    # print("URL:", f"https://medic-ai-lyzr.feynmanpi.com/media/{image_path}")
+    print("URL:", url)
+    response = requests.get(f"https://api.ocr.space/parse/imageurl?apikey={api_ocr}&url={url}")
     print("RESPONSE", response)
     content = response.json()
     # Extract text details
