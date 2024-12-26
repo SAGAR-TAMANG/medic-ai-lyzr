@@ -35,15 +35,14 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
-    'django_cleanup.apps.CleanupConfig',
-    'model',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites', # new
+    'django_cleanup.apps.CleanupConfig',
+    'model',
 ]
 
 MIDDLEWARE = [
@@ -160,3 +159,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://medic-ai-lyzr.feynmanpi.com/',
+]
