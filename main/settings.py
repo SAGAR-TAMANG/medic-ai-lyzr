@@ -161,5 +161,6 @@ MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://medic-ai-lyzr.feynmanpi.com/',
+    'https://medic-ai-lyzr.feynmanpi.com',
+    'http://medic-ai-lyzr.feynmanpi.com',
 ]
