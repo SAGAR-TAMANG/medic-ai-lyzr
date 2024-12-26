@@ -138,13 +138,12 @@ STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
-    # "/var/www/static/",
 ]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# STATIC_ROOT = "/var/www/static/"
+STATIC_ROOT = "/static_root/"
   
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -153,27 +152,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-
-SITE_ID = 1
-
-AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin, regardless of `allauth`
-    'django.contrib.auth.backends.ModelBackend',
-
-    # `allauth` specific authentication methods, such as login by e-mail
-    'allauth.account.auth_backends.AuthenticationBackend',
-]
-
-ACCOUNT_EMAIL_REQUIRED = True
-
-ACCOUNT_EMAIL_VERIFICATION = 'required'
-
-LOGIN_REDIRECT_URL = '/'
-
-EMAIL_HOST = 'smtp.gmail.com' #new
-EMAIL_PORT = 587 #new
-EMAIL_HOST_USER = 'cs22bcagn033@kazirangauniversity.in'  #new
-EMAIL_HOST_PASSWORD = "Sagar@9421309" #new
-EMAIL_USE_TLS = True #new
-
-ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
