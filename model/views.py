@@ -31,6 +31,7 @@ def index_poster(request):
     if request.method == 'POST' and 'file' in request.FILES:
         print("INSIDE THE POST")
         uploaded_file = request.FILES['file']
+        fs = FileSystemStorage()
         name = fs.save(uploaded_file.name, uploaded_file)
         url = fs.url(name)
 
