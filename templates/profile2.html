@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if user.is_authenticated %}
+{% if language %}
+<div class="alert alert-success w-50 m-auto my-4 text-center" role="alert">
+  Your current language is {{ language }}
+</div>
+{% endif %}
+<div class="px-4 py-2 my-1 text-center">
+  <h1 class="display-5 fw-bold">Welcome {{ user.username }}</h1>
+  <div class="col-lg-6 mx-auto">
+    <form method="post" action="{% url 'profile' %}">
+      {% csrf_token %}
+      <div class="list-group list-group-checkable d-grid gap-2 border-0">
+        <label class="list-group-item rounded-3 py-3" for="englishRadio">
+          <input class="list-group-item-check pe-none" type="radio" name="language" id="englishRadio" value="en">
+          English (en)
+          <span class="d-block small opacity-50">With support text underneath to add more detail</span>
+        </label>
+    
+        <label class="list-group-item rounded-3 py-3" for="hindiRadio">
+          <input class="list-group-item-check pe-none" type="radio" name="language" id="hindiRadio" value="hi">
+          Hindi (hi)
+          <span class="d-block small opacity-50">Some other text goes here</span>
+        </label>
+    
+        <label class="list-group-item rounded-3 py-3" for="bengaliRadio">
+          <input class="list-group-item-check pe-none" type="radio" name="language" id="bengaliRadio" value="bn">
+          Bengali (bn)
+          <span class="d-block small opacity-50">And we end with another snippet of text</span>
+        </label>
+    
+        <label class="list-group-item rounded-3 py-3" for="assameseRadio">
+          <input class="list-group-item-check pe-none" type="radio" name="language" id="assameseRadio" value="as">
+          Assamese (as)
+          <span class="d-block small opacity-50">And we end with another snippet of text</span>
+        </label>
+    
+        <label class="list-group-item rounded-3 py-3" for="nepaliRadio">
+          <input class="list-group-item-check pe-none" type="radio" name="language" id="nepaliRadio" value="np">
+          Nepali (np)
+          <span class="d-block small opacity-50">And we end with another snippet of text</span>
+        </label>
+      </div>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+  </div>
+</div>
+{% else %}
+
+{% endif %}
+
+
+
+{% endblock %}

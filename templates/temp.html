@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="menu">
+    Press me
+  </button>
+  <button id="menu">
+    Press me
+  </button>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll("#menu").forEach((button) => {
+        button.addEventListener("click", function () {
+          console.log("PRESSED");
+        });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,519 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<div class="px-4 pt-5 my-5 text-center border-bottom">
+  <h1 class="display-4 fw-bold text-body-emphasis">
+    <span class="display-5 fw-bold">AI Powered Medical Reports</span><br>
+    <span class="text-ai">SUMMARIZER</span>
+  </h1>
+  <div class="col-lg-6 mx-auto">
+    <p class="mb-4">
+      <span id="autotype"></span>
+    </p>
+    <form
+      class="w-100 my-3"
+      role="search"
+      action=""
+      method="POST"
+    >
+      {% csrf_token %}
+
+      <div class="">
+        <div class="">
+          <button
+            id="menu"
+            type="button"
+            data-page="page-1"
+            class="btn btn-outline-primary fs-7 border-bottom-0 custom-border page-1"
+          >
+            <i class="fa fa-search fa-xs"></i>
+            <span class="fs-7">Write your report</span>
+          </button>
+          <button
+            id="menu"
+            type="button"
+            data-page="page-2"
+            class="btn btn-primary fs-7 page-2 border-bottom-0 custom-border "
+          >
+            <i class="fa-solid fa-image fa-xs"></i>
+            Extract Image
+          </button>
+          <button
+            id="menu"
+            type="button"
+            data-page="page-3"
+            class="btn btn-primary fs-7 page-3 border-bottom-0 custom-border d-none d-md-inline-block"
+          >
+            <i class="fa fa-file-pdf fa-xs"></i>
+            Extract PDF
+          </button>
+          <button
+            id="menu"
+            type="button"
+            data-page="page-1"
+            class="btn btn-primary fs-7 page-4 border-bottom-0 custom-border d-none d-md-inline-block"
+            onclick="takePicture()"
+          >
+            <i class="fa fa-camera fa-xs"></i> Take a picture
+          </button>
+        </div>
+      </div>
+      <div id="page-1" class="">
+        <div class="input-group mb-4">
+          <input
+            type="search"
+            placeholder="Write your report here.."
+            aria-describedby="button-addon5"
+            aria-label="Search"
+            class="form-control"
+            search_space="search_space"
+            name="search_space"
+          />
+          <div class="input-group-append">
+            <button id="button-addon5" type="submit" class="btn btn-primary d-none d-md-inline-block">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div id="page-2" class="d-none">
+        <div
+          class="relative flex h-96 flex-col rounded-md rounded-tl-none border p-5"
+        >
+          <div class="flex grow flex-col">
+            <div
+              id="dropArea2"
+              class="flex grow flex-col items-center justify-center gap-6 rounded-md border border-dashed transition-colors p-4 py-5 border-primary-500 hover:bg-neutral-10 cursor-pointer"
+              role="presentation"
+            >
+              <div class="">
+                <p class="m-0 text-center text-xl font-semibold">
+                  <span
+                    >Upload Image files
+                    <small class="text-sm font-normal text-neutral-700"
+                      >(JPG/PNG/JPEG)</small
+                    ></span
+                  >
+                </p>
+                <p class="m-0 mt-2 text-sm font-medium">
+                  Get summarized report & information from multiple images.
+                </p>
+              </div>
+              <input
+                accept="application/pdf,.pdf"
+                multiple=""
+                type="file"
+                tabindex="-1"
+                style="display: none"
+              /><svg
+                width="80"
+                height="80"
+                viewBox="0 0 80 80"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="40" cy="40" r="40" fill="#F2F3F3"></circle>
+                <g opacity="0.6">
+                  <path
+                    d="M15.115 26.5369C13.8591 27.2877 13.0249 28.4211 12.6899 29.8596C12.3672 31.2216 11.9841 29.5774 16.5898 46.7709C20.5072 61.3944 20.6956 62.067 20.9411 62.4644C21.8956 63.9799 23.532 64.9553 25.2469 65.0321L25.8262 65.0557L36.404 62.2221L46.9818 59.3886L47.4717 59.0786C48.913 58.1644 49.8463 56.4844 49.9173 54.7022C49.9314 54.2354 49.7847 53.6572 46.8157 42.5739L43.7087 30.9752L38.1401 32.4019L34.6513 30.3173L31.5056 28.0692L29.9825 22.3836L22.5666 24.3782C15.8992 26.1643 15.5728 26.2599 15.115 26.5369Z"
+                    fill="#FA6400"
+                  ></path>
+                  <path
+                    d="M32.3214 32.0125L29.7578 22.4426L43.7403 31.0917L34.7572 33.4305C33.6936 33.7074 32.6058 33.0741 32.3214 32.0125Z"
+                    fill="#FC9855"
+                  ></path>
+                </g>
+                <g opacity="0.3">
+                  <path
+                    d="M49.9162 20.6712C48.4531 20.6935 47.1641 21.2581 46.1548 22.3364C45.1944 23.3547 45.6846 21.7392 41.0777 38.9323C37.1594 53.5556 36.9862 54.2323 37.0003 54.6992C37.0692 56.4889 37.9988 58.1518 39.4456 59.0757L39.9355 59.3857L50.5131 62.22L61.0907 65.0542L61.67 65.0307C63.3753 64.9595 65.0235 63.9711 65.976 62.4632C66.2216 62.0659 66.3836 61.4918 69.3533 50.4088L72.4611 38.8102L66.9251 37.2618L64.9457 33.7123L63.3453 30.1926L64.8688 24.5071L57.4489 22.5271C50.7816 20.7406 50.4512 20.6602 49.9162 20.6712Z"
+                    fill="#FA6400"
+                  ></path>
+                  <path
+                    d="M62.0794 34.0164L64.6436 24.4467L72.4292 38.9278L63.48 36.4622C62.4204 36.1703 61.7949 35.0781 62.0794 34.0164Z"
+                    fill="#FC9855"
+                  ></path>
+                </g>
+                <path
+                  d="M31.0729 18.3248C29.6655 18.7251 28.5665 19.6041 27.8707 20.9069C27.2065 22.1391 27.2619 20.4517 27.2619 38.2513C27.2619 53.3905 27.2698 54.0889 27.4042 54.5363C27.9339 56.2472 29.2623 57.6128 30.8989 58.1307L31.4524 58.3034H42.4031H53.3538L53.9073 58.1307C55.5361 57.6206 56.8723 56.2393 57.402 54.5363C57.5364 54.0889 57.5443 53.4925 57.5443 42.0185V30.0108L51.7962 29.948L48.9656 27.0317L46.5088 24.0462L46.5088 18.16L38.8293 18.1679C31.9268 18.1679 31.5868 18.1757 31.0729 18.3248Z"
+                  fill="#FA6400"
+                ></path>
+                <path
+                  d="M46.2764 28.0674V18.16L57.5447 30.1326L48.2623 30.0673C47.1632 30.0596 46.2764 29.1664 46.2764 28.0674Z"
+                  fill="#FC9855"
+                ></path>
+                <g filter="url(#filter0_d_38795_2279)">
+                  <rect
+                    x="28.5938"
+                    y="34.0091"
+                    width="26.7622"
+                    height="26.7622"
+                    rx="13.3811"
+                    fill="white"
+                    shape-rendering="crispEdges"
+                  ></rect>
+                  <path
+                    d="M42.4902 42.1246L45.4902 45.1246C45.7949 45.4059 45.7949 45.898 45.4902 46.1793C45.209 46.484 44.7168 46.484 44.4355 46.1793L42.7246 44.4684V49.3902C42.7246 49.8121 42.373 50.1402 41.9746 50.1402C41.5527 50.1402 41.2246 49.8121 41.2246 49.3902V44.4684L39.4902 46.1793C39.209 46.484 38.7168 46.484 38.4355 46.1793C38.1309 45.898 38.1309 45.4059 38.4355 45.1246L41.4355 42.1246C41.7168 41.8199 42.209 41.8199 42.4902 42.1246ZM38.2246 50.1402V51.6402C38.2246 52.0621 38.5527 52.3902 38.9746 52.3902H44.9746C45.373 52.3902 45.7246 52.0621 45.7246 51.6402V50.1402C45.7246 49.7418 46.0527 49.3902 46.4746 49.3902C46.873 49.3902 47.2246 49.7418 47.2246 50.1402V51.6402C47.2246 52.8824 46.2168 53.8902 44.9746 53.8902H38.9746C37.7324 53.8902 36.7246 52.8824 36.7246 51.6402V50.1402C36.7246 49.7418 37.0527 49.3902 37.4746 49.3902C37.873 49.3902 38.2246 49.7418 38.2246 50.1402Z"
+                    fill="#FA6400"
+                  ></path>
+                </g>
+                <defs>
+                  <filter
+                    id="filter0_d_38795_2279"
+                    x="21.0714"
+                    y="32.1285"
+                    width="41.8075"
+                    height="41.807"
+                    filterUnits="userSpaceOnUse"
+                    color-interpolation-filters="sRGB"
+                  >
+                    <feFlood
+                      flood-opacity="0"
+                      result="BackgroundImageFix"
+                    ></feFlood>
+                    <feColorMatrix
+                      in="SourceAlpha"
+                      type="matrix"
+                      values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                      result="hardAlpha"
+                    ></feColorMatrix>
+                    <feOffset dy="5.64179"></feOffset>
+                    <feGaussianBlur stdDeviation="3.76119"></feGaussianBlur>
+                    <feComposite in2="hardAlpha" operator="out"></feComposite>
+                    <feColorMatrix
+                      type="matrix"
+                      values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0"
+                    ></feColorMatrix>
+                    <feBlend
+                      mode="normal"
+                      in2="BackgroundImageFix"
+                      result="effect1_dropShadow_38795_2279"
+                    ></feBlend>
+                    <feBlend
+                      mode="normal"
+                      in="SourceGraphic"
+                      in2="effect1_dropShadow_38795_2279"
+                      result="shape"
+                    ></feBlend>
+                  </filter>
+                </defs>
+              </svg>
+              <div class="flex flex-col">
+                <span
+                  class="text-typo-secondary text-sm no-underline text-center text-gray-600"
+                  >Drag your file here, or
+                  <span class="text-primary underline">Browse</span>.</span
+                >
+                <br />
+                <span
+                  class="text-typo-secondary fs-7 no-underline text-center text-gray-600"
+                  >Max file size per image is 10 MB</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="page-3" class="d-none">
+        <div
+          class="relative flex h-96 flex-col rounded-md rounded-tl-none border p-5"
+        >
+          <div class="flex grow flex-col">
+            <div
+              id="dropArea"
+              class="flex grow flex-col items-center justify-center gap-6 rounded-md border border-dashed transition-colors p-4 py-5 border-primary-500 hover:bg-neutral-10 cursor-pointer"
+              role="presentation"
+            >
+              <div class="">
+                <p class="m-0 text-center text-xl font-semibold">
+                  <span
+                    >Upload PDF files
+                    <small class="text-sm font-normal text-neutral-700"
+                      >(PDF Files only)</small
+                    ></span
+                  >
+                </p>
+                <p class="m-0 mt-2 text-sm font-medium">
+                  Define information points &amp; Extract information from
+                  multiple pdfs
+                </p>
+              </div>
+              <input
+                accept="application/pdf,.pdf"
+                multiple=""
+                type="file"
+                tabindex="-1"
+                style="display: none"
+              /><svg
+                width="80"
+                height="80"
+                viewBox="0 0 80 80"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="40" cy="40" r="40" fill="#F2F3F3"></circle>
+                <g opacity="0.6">
+                  <path
+                    d="M15.115 26.5369C13.8591 27.2877 13.0249 28.4211 12.6899 29.8596C12.3672 31.2216 11.9841 29.5774 16.5898 46.7709C20.5072 61.3944 20.6956 62.067 20.9411 62.4644C21.8956 63.9799 23.532 64.9553 25.2469 65.0321L25.8262 65.0557L36.404 62.2221L46.9818 59.3886L47.4717 59.0786C48.913 58.1644 49.8463 56.4844 49.9173 54.7022C49.9314 54.2354 49.7847 53.6572 46.8157 42.5739L43.7087 30.9752L38.1401 32.4019L34.6513 30.3173L31.5056 28.0692L29.9825 22.3836L22.5666 24.3782C15.8992 26.1643 15.5728 26.2599 15.115 26.5369Z"
+                    fill="#FA6400"
+                  ></path>
+                  <path
+                    d="M32.3214 32.0125L29.7578 22.4426L43.7403 31.0917L34.7572 33.4305C33.6936 33.7074 32.6058 33.0741 32.3214 32.0125Z"
+                    fill="#FC9855"
+                  ></path>
+                </g>
+                <g opacity="0.3">
+                  <path
+                    d="M49.9162 20.6712C48.4531 20.6935 47.1641 21.2581 46.1548 22.3364C45.1944 23.3547 45.6846 21.7392 41.0777 38.9323C37.1594 53.5556 36.9862 54.2323 37.0003 54.6992C37.0692 56.4889 37.9988 58.1518 39.4456 59.0757L39.9355 59.3857L50.5131 62.22L61.0907 65.0542L61.67 65.0307C63.3753 64.9595 65.0235 63.9711 65.976 62.4632C66.2216 62.0659 66.3836 61.4918 69.3533 50.4088L72.4611 38.8102L66.9251 37.2618L64.9457 33.7123L63.3453 30.1926L64.8688 24.5071L57.4489 22.5271C50.7816 20.7406 50.4512 20.6602 49.9162 20.6712Z"
+                    fill="#FA6400"
+                  ></path>
+                  <path
+                    d="M62.0794 34.0164L64.6436 24.4467L72.4292 38.9278L63.48 36.4622C62.4204 36.1703 61.7949 35.0781 62.0794 34.0164Z"
+                    fill="#FC9855"
+                  ></path>
+                </g>
+                <path
+                  d="M31.0729 18.3248C29.6655 18.7251 28.5665 19.6041 27.8707 20.9069C27.2065 22.1391 27.2619 20.4517 27.2619 38.2513C27.2619 53.3905 27.2698 54.0889 27.4042 54.5363C27.9339 56.2472 29.2623 57.6128 30.8989 58.1307L31.4524 58.3034H42.4031H53.3538L53.9073 58.1307C55.5361 57.6206 56.8723 56.2393 57.402 54.5363C57.5364 54.0889 57.5443 53.4925 57.5443 42.0185V30.0108L51.7962 29.948L48.9656 27.0317L46.5088 24.0462L46.5088 18.16L38.8293 18.1679C31.9268 18.1679 31.5868 18.1757 31.0729 18.3248Z"
+                  fill="#FA6400"
+                ></path>
+                <path
+                  d="M46.2764 28.0674V18.16L57.5447 30.1326L48.2623 30.0673C47.1632 30.0596 46.2764 29.1664 46.2764 28.0674Z"
+                  fill="#FC9855"
+                ></path>
+                <g filter="url(#filter0_d_38795_2279)">
+                  <rect
+                    x="28.5938"
+                    y="34.0091"
+                    width="26.7622"
+                    height="26.7622"
+                    rx="13.3811"
+                    fill="white"
+                    shape-rendering="crispEdges"
+                  ></rect>
+                  <path
+                    d="M42.4902 42.1246L45.4902 45.1246C45.7949 45.4059 45.7949 45.898 45.4902 46.1793C45.209 46.484 44.7168 46.484 44.4355 46.1793L42.7246 44.4684V49.3902C42.7246 49.8121 42.373 50.1402 41.9746 50.1402C41.5527 50.1402 41.2246 49.8121 41.2246 49.3902V44.4684L39.4902 46.1793C39.209 46.484 38.7168 46.484 38.4355 46.1793C38.1309 45.898 38.1309 45.4059 38.4355 45.1246L41.4355 42.1246C41.7168 41.8199 42.209 41.8199 42.4902 42.1246ZM38.2246 50.1402V51.6402C38.2246 52.0621 38.5527 52.3902 38.9746 52.3902H44.9746C45.373 52.3902 45.7246 52.0621 45.7246 51.6402V50.1402C45.7246 49.7418 46.0527 49.3902 46.4746 49.3902C46.873 49.3902 47.2246 49.7418 47.2246 50.1402V51.6402C47.2246 52.8824 46.2168 53.8902 44.9746 53.8902H38.9746C37.7324 53.8902 36.7246 52.8824 36.7246 51.6402V50.1402C36.7246 49.7418 37.0527 49.3902 37.4746 49.3902C37.873 49.3902 38.2246 49.7418 38.2246 50.1402Z"
+                    fill="#FA6400"
+                  ></path>
+                </g>
+                <defs>
+                  <filter
+                    id="filter0_d_38795_2279"
+                    x="21.0714"
+                    y="32.1285"
+                    width="41.8075"
+                    height="41.807"
+                    filterUnits="userSpaceOnUse"
+                    color-interpolation-filters="sRGB"
+                  >
+                    <feFlood
+                      flood-opacity="0"
+                      result="BackgroundImageFix"
+                    ></feFlood>
+                    <feColorMatrix
+                      in="SourceAlpha"
+                      type="matrix"
+                      values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                      result="hardAlpha"
+                    ></feColorMatrix>
+                    <feOffset dy="5.64179"></feOffset>
+                    <feGaussianBlur stdDeviation="3.76119"></feGaussianBlur>
+                    <feComposite in2="hardAlpha" operator="out"></feComposite>
+                    <feColorMatrix
+                      type="matrix"
+                      values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0"
+                    ></feColorMatrix>
+                    <feBlend
+                      mode="normal"
+                      in2="BackgroundImageFix"
+                      result="effect1_dropShadow_38795_2279"
+                    ></feBlend>
+                    <feBlend
+                      mode="normal"
+                      in="SourceGraphic"
+                      in2="effect1_dropShadow_38795_2279"
+                      result="shape"
+                    ></feBlend>
+                  </filter>
+                </defs>
+              </svg>
+              <div class="flex flex-col">
+                <span
+                  class="text-typo-secondary text-sm no-underline text-center text-gray-600"
+                  >Drag your file here, or
+                  <span class="text-primary underline">Browse</span>.</span
+                >
+                <br />
+                <span
+                  class="text-typo-secondary fs-7 no-underline text-center text-gray"
+                  >Max file size per PDF 50 MB</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <input class="btn btn-primary mt-1 d-none" type="submit" id="submitBtn" />
+    </form>
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+      <form
+        style="display: none"
+        id="Uploadform"
+        method="POST"
+        enctype="multipart/form-data"
+        action=""
+      >
+        {% csrf_token %}
+        <input
+          type="file"
+          name="file"
+          id="fileInput"
+          onchange="handleFileUpload(this.files)"
+        />
+      </form>
+    </div>
+  </div>
+
+  {% if extracted_text %}
+  <div class="alert alert-success w-75 mx-auto" role="alert">
+    <h4 class="alert-heading">Image Successfully Processed!</h4>
+    <hr />
+    <p>The texts of the image is: {{ extracted_text }}</p>
+  </div>
+  {% endif %}
+  
+  <!-- FAQ 3 - Bootstrap Brain Component -->
+  <section id="faq" class="bsb-faq-3 py-0 py-md-5 py-xl-8">
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+          <h2 class="mb-4 fs-4 text-center">Frequently Asked Questions</h2>
+          <!-- <p class="text-secondary text-center lead fs-6">
+            Frequently asked questions
+          </p> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQs: My Account -->
+    <div class="mb-8">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-11 col-xl-10">
+            <div class="accordion accordion-flush" id="faqAccount">
+              <div
+                class="accordion-item bg-transparent border-top border-bottom py-3"
+              >
+                <h2 class="accordion-header" id="faqAccountHeading1">
+                  <button
+                    class="accordion-button collapsed bg-transparent fw-bold shadow-none link-primary"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#faqAccountCollapse1"
+                    aria-expanded="false"
+                    aria-controls="faqAccountCollapse1"
+                  >
+                    Do you store my data? 
+                  </button>
+                </h2>
+                <div
+                  id="faqAccountCollapse1"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="faqAccountHeading1"
+                >
+                  <div class="accordion-body">
+                    <p>
+                      No, we prioritize user privacy and do not store any personal data or information provided by users.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item bg-transparent border-bottom py-3">
+                <h2 class="accordion-header" id="faqAccountHeading2">
+                  <button
+                    class="accordion-button collapsed bg-transparent fw-bold shadow-none link-primary"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#faqAccountCollapse2"
+                    aria-expanded="false"
+                    aria-controls="faqAccountCollapse2"
+                  >
+                    Do I need not to consult a doctor or a physician?
+                  </button>
+                </h2>
+                <div
+                  id="faqAccountCollapse2"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="faqAccountHeading2"
+                >
+                  <div class="accordion-body">
+                    <p>
+                      While our platform provides valuable insights, it is not a substitute for professional medical advice. We always recommend consulting a doctor or physician for personalized medical guidance.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item bg-transparent border-bottom py-3">
+                <h2 class="accordion-header" id="faqAccountHeading3">
+                  <button
+                    class="accordion-button collapsed bg-transparent fw-bold shadow-none link-primary"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#faqAccountCollapse3"
+                    aria-expanded="false"
+                    aria-controls="faqAccountCollapse3"
+                  >
+                    Is the information generated here accurate?
+                  </button>
+                </h2>
+                <div
+                  id="faqAccountCollapse3"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="faqAccountHeading3"
+                >
+                  <div class="accordion-body">
+                    <p>
+                      We strive to provide accurate and reliable information based on the latest research and technology. However, it's essential to verify any information with a healthcare professional for confirmation.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="overflow-hidden" style="max-height: 40vh">
+    <div class="container px-5">
+      <img
+        src="{% static 'img/image2.png' %}"
+        class="img-fluid border rounded-3 shadow-lg mb-4"
+        alt="Example image"
+        width="800"
+        height="500"
+        loading="lazy"
+      />
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class=" row">
+    <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
+      <h1 class="text-center my-5 fs-1 text-body-emphasis">
+        <span class="fw-bold">Powered By </span>
+        <br>
+        <a href="https://studio.lyzr.ai/" class="text-decoration-none" target="_blank">
+          <span class="text-ai-2">the Lyzr Agent Studio </span>
+        </a>
+      </h1>
+    </div>
+    <div class="col-12 col-md-6 col-lg-6 py-4 d-flex justify-content-center align-items-center">
+      <img src="{% static 'img/cropped-Lyzr-Logo-1.png' %}" height="300" alt="">
+    </div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+<script src="{% static 'js/index.js' %}"></script>
+
+{% endblock %}

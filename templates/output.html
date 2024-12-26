@@ -1,0 +1,368 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+
+<section id="poster">
+  <div class="section_our_solution pt-5 overflow-hidden">
+    
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="our_solution_category">
+          <div class="solution_cards_box">
+            {% if audio %}
+            <div class="solution_card">
+              <div class="hover_color_bubble"></div>
+              <div class="so_top_icon">
+                <img
+                  src="{% static 'img/music-bar.svg' %}"
+                  alt="medical_test"
+                  class="img-fluid"
+                />
+              </div>
+              <div class="solu_title text-ai-2">
+                <h3>Listen Here</span></h3>
+              </div>
+              <div class="solu_description">
+                <p>Listen to the report.</p>
+                <!-- <button type="button" class="read_more_btn">Play</button> -->
+                <audio controls>
+                  <source src="{{ MEDIA_URL }}{{ audio }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+                </audio>
+              </div>
+            </div>
+            {% endif %}
+            <div class="solution_card">
+              <div class="hover_color_bubble"></div>
+              <div class="so_top_icon">
+                <img
+                  src="{% static 'img/doctor-svgrepo-com.svg' %}"
+                  alt="medical_test"
+                  class="img-fluid"
+                />
+              </div>
+              <div class="solu_title">
+                {% if language == 'hi' %}
+                <h3>Medical Test Overview <br><span class="text-ai-2 fs-5"> मेडिकल टेस्ट अवलोकन</span></h3>
+                {% elif language == 'bn' %}
+                <h3>Medical Test Overview <br><span class="text-ai-2 fs-5"> মেডিকেল টেস্ট ওভারভিউ</span></h3>
+                {% elif language == 'as' %}
+                <h3>Medical Test Overview <br><span class="text-ai-2 fs-5"> চিকিৎসা পৰীক্ষাৰ অভাৰভিউ</span></h3>
+                {% elif language == 'di' %}
+                <h3>Medical Test Overview <br><span class="text-ai-2 fs-5"> मेडिकल टेस्ट अवलोकन</span></h3>
+                {% elif language == 'kn' %}
+                <h3>Medical Test Overview <br><span class="text-ai-2 fs-5"> ವೈದ್ಯಕೀಯ ಪರೀಕ್ಷೆಯ ಅವಲೋಕನ</span></h3>
+                {% elif language == 'si' %}
+                <h3>Medical Test Overview <br><span class="text-ai-2 fs-5"> ميڊيڪل ٽيسٽ جو جائزو</span></h3>
+                {% elif language == 'sa' %}
+                <h3>Medical Test Overview <br><span class="text-ai-2 fs-5"> Sohon Rog Rogotko Thekeh</span></h3>
+                {% elif language == 'ur' %}
+                <h3>Medical Test Overview <br><span class="text-ai-2 fs-5"> میڈیکل ٹیسٹ کا جائزہ</span></h3>
+                {% elif language == 'ta' %}
+                <h3>Medical Test Overview <br><span class="text-ai-2 fs-5"> மருத்துவ பரிசோதனை கண்ணோட்டம்</span></h3>
+                {% else %}
+                <h3>Medical Test Overview</span></h3>
+                {% endif %}
+              </div>
+              <div class="solu_description">
+                <p>{{ list_outputs.1 }}</p>
+                <button type="button" class="read_more_btn">Read More</button>
+              </div>
+            </div>
+            <div class="solution_card">
+              <div class="hover_color_bubble"></div>
+              <div class="so_top_icon">
+                <img
+                  src="{% static 'img/medical-history-svgrepo-com (1).svg' %}"
+                  alt="medical_test"
+                  class="img-fluid"
+                />
+              </div>
+              <div class="solu_title">
+                {% if language == 'hi' %}
+                <h3>Test Result Significance <br><span class="text-ai-2 fs-5"> परीक्षा परिणाम का महत्व </span></h3>
+                {% elif language == 'bn' %}
+                <h3>Test Result Significance <br><span class="text-ai-2 fs-5"> পরীক্ষার ফলাফলের গুরুত্ব</span></h3>
+                {% elif language == 'as' %}
+                <h3>Test Result Significance <br><span class="text-ai-2 fs-5"> পৰীক্ষাৰ ফলাফলৰ তাৎপৰ্য্য</span></h3>
+                {% elif language == 'sa' %}
+                <h3>Test Result Significance <br><span class="text-ai-2 fs-5"> Rog Rogotko Thekeh'n Disom</span></h3>
+                {% elif language == 'ur' %}
+                <h3>Test Result Significance <br><span class="text-ai-2 fs-5"> ٹیسٹ کے نتائج کی اہمیت</span></h3>
+                {% elif language == 'ta' %}
+                <h3>Test Result Significance <br><span class="text-ai-2 fs-5"> சோதனை முடிவு முக்கியத்துவம்</span></h3>
+                {% elif language == 'di' %}
+                <h3>Test Result Significance <br><span class="text-ai-2 fs-5"> परीक्षण दे नतीजे दा महत्व</span></h3>
+                {% elif language == 'kn' %}
+                <h3>Test Result Significance <br><span class="text-ai-2 fs-5"> ಪರೀಕ್ಷಾ ಫಲಿತಾಂಶದ ಮಹತ್ವ</span></h3>
+                {% elif language == 'si' %}
+                <h3>Test Result Significance <br><span class="text-ai-2 fs-5"> امتحان جي نتيجن جي اهميت</span></h3>
+                {% else %}
+                <h3>Test Result Significance</span></h3>
+                {% endif %}
+              </div>
+              <div class="solu_description">
+                <p>{{ list_outputs.2 }}</p>
+                <button type="button" class="read_more_btn">Read More</button>
+              </div>
+            </div>
+            <div class="solution_card">
+              <div class="hover_color_bubble"></div>
+              <div class="so_top_icon">
+                <img
+                  src="{% static 'img/mortar-pharmacy-svgrepo-com.svg' %}"
+                  alt="medical_test"
+                  class="img-fluid"
+                />
+              </div>
+              <div class="solu_title">
+                {% if language == 'hi' %}
+                <h3>Dietary Suggestions <br><span class="text-ai-2 fs-5"> आहार संबंधी सुझाव</span></h3>
+                {% elif language == 'bn' %}
+                <h3>Dietary Suggestions <br><span class="text-ai-2 fs-5"> খাদ্যতালিকাগত পরামর্শ</span></h3>
+                {% elif language == 'as' %}
+                <h3>Dietary Suggestions <br><span class="text-ai-2 fs-5"> খাদ্যৰ পৰামৰ্শ</span></h3>
+                {% elif language == 'sa' %}
+                <h3>Dietary Suggestions <br><span class="text-ai-2 fs-5"> Aahar Anjca'n</span></h3>
+                {% elif language == 'ur' %}
+                <h3>Dietary Suggestions <br><span class="text-ai-2 fs-5"> غذائیت کی تجاویز</span></h3>
+                {% elif language == 'ta' %}
+                <h3>Dietary Suggestions <br><span class="text-ai-2 fs-5"> உணவு பரிந்துரைகள்</span></h3>
+                {% elif language == 'di' %}
+                <h3>Dietary Suggestions <br><span class="text-ai-2 fs-5"> आहार दे सुझाव</span></h3>
+                {% elif language == 'kn' %}
+                <h3>Dietary Suggestions <br><span class="text-ai-2 fs-5"> ಆಹಾರದ ಸಲಹೆಗಳು</span></h3>
+                {% elif language == 'si' %}
+                <h3>Dietary Suggestions <br><span class="text-ai-2 fs-5"> غذائي تجويزون</span></h3>
+                {% else %}
+                <h3>Dietary Suggestions</span></h3>
+                {% endif %}
+              </div>
+              <div class="solu_description">
+                <p>{{ list_outputs.3 }}</p>
+                <button type="button" class="read_more_btn">Read More</button>
+              </div>
+            </div>
+            <div class="solution_card">
+              <div class="hover_color_bubble"></div>
+              <div class="so_top_icon">
+                <img
+                src="{% static 'img/yoga-svgrepo-com (1).svg' %}"
+                alt="medical_test"
+                class="img-fluid"
+              />
+              </div>
+              <div class="solu_title">
+                {% if language == 'hi' %}
+                <h3>Beneficial Yoga Postures <br><span class="text-ai-2 fs-5"> लाभकारी योग आसन</span></h3>
+                {% elif language == 'bn' %}
+                <h3>Beneficial Yoga Postures <br><span class="text-ai-2 fs-5"> উপকারী যোগব্যায়াম ভঙ্গি</span></h3>
+                {% elif language == 'as' %}
+                <h3>Beneficial Yoga Postures <br><span class="text-ai-2 fs-5"> উপকাৰী যোগ ভংগীমা</span></h3>
+                {% elif language == 'sa' %}
+                <h3>Beneficial Yoga Postures <br><span class="text-ai-2 fs-5"> Sustha Asan</span></h3>
+                {% elif language == 'ur' %}
+                <h3>Beneficial Yoga Postures <br><span class="text-ai-2 fs-5"> فائدہ مند یوگا آسن</span></h3>
+                {% elif language == 'ta' %}
+                <h3>Beneficial Yoga Postures <br><span class="text-ai-2 fs-5"> பயனுள்ள யோகா நிலைகள்</span></h3>
+                {% elif language == 'di' %}
+                <h3>Beneficial Yoga Postures <br><span class="text-ai-2 fs-5"> फायदेमंद योग मुद्राएं</span></h3>
+                {% elif language == 'kn' %}
+                <h3>Beneficial Yoga Postures <br><span class="text-ai-2 fs-5"> ಪ್ರಯೋಜನಕಾರಿ ಯೋಗ ಭಂಗಿಗಳು</span></h3>
+                {% elif language == 'si' %}
+                <h3>Beneficial Yoga Postures <br><span class="text-ai-2 fs-5"> فائديمند يوگا پوزيشن</span></h3>
+                {% else %}
+                <h3>Beneficial Yoga Postures</span></h3>
+                {% endif %}
+              </div>
+              <div class="solu_description">
+                <p>{{ list_outputs.4 }}</p>
+                <button type="button" class="read_more_btn">Read More</button>
+              </div>
+            </div>
+          </div>
+          <!--  -->
+          <div class="solution_cards_box sol_card_top_3">
+            <div class="solution_card">
+              <div class="hover_color_bubble"></div>
+              <div class="so_top_icon">
+                <img
+                  src="{% static 'img/lungs-lung-svgrepo-com.svg' %}"
+                  alt="medical_test"
+                  class="img-fluid"
+                />
+              </div>
+              <div class="solu_title">
+                {% if language == 'hi' %}
+                <h3>Recommended Exercises <br><span class="text-ai-2 fs-5"> अनुशंसित व्यायाम</span></h3>
+                {% elif language == 'bn' %}
+                <h3>Recommended Exercises <br><span class="text-ai-2 fs-5"> প্রস্তাবিত ব্যায়াম</span></h3>
+                {% elif language == 'as' %}
+                <h3>Recommended Exercises <br><span class="text-ai-2 fs-5"> পৰামৰ্শ দিয়া অনুশীলন</span></h3>
+                {% elif language == 'sa' %}
+                <h3>Recommended Exercises <br><span class="text-ai-2 fs-5"> Lohrok Sohon Thekeh'n Asan</span></h3>
+                {% elif language == 'ur' %}
+                <h3>Recommended Exercises <br><span class="text-ai-2 fs-5"> تجویز کردہ مشقیں۔</span></h3>
+                {% elif language == 'ta' %}
+                <h3>Recommended Exercises <br><span class="text-ai-2 fs-5"> பரிந்துரைக்கப்பட்ட பயிற்சிகள்</span></h3>
+                {% elif language == 'di' %}
+                <h3>Recommended Exercises <br><span class="text-ai-2 fs-5"> अनुशंसित अभ्यास</span></h3>
+                {% elif language == 'kn' %}
+                <h3>Recommended Exercises <br><span class="text-ai-2 fs-5"> ಶಿಫಾರಸು ಮಾಡಿದ ವ್ಯಾಯಾಮಗಳು</span></h3>
+                {% elif language == 'si' %}
+                <h3>Recommended Exercises <br><span class="text-ai-2 fs-5"> تجويز ڪيل مشقون</span></h3>
+                {% else %}
+                <h3>Recommended Exercises</span></h3>
+                {% endif %}
+              </div>
+              <div class="solu_description">
+                <p>{{ list_outputs.5 }}</p>
+                <button type="button" class="read_more_btn">Read More</button>
+              </div>
+            </div>
+            <div class="solution_card">
+              <div class="hover_color_bubble"></div>
+              <div class="so_top_icon">
+                <img
+                  src="{% static 'img/health-svgrepo-com.svg' %}"
+                  alt="medical_test"
+                  class="img-fluid"
+                />
+              </div>
+              <div class="solu_title">
+                {% if language == 'hi' %}
+                <h3>Lifestyle Modifications <br><span class="text-ai-2 fs-5"> जीवनशैली में संशोधन</span></h3>
+                {% elif language == 'bn' %}
+                <h3>Lifestyle Modifications <br><span class="text-ai-2 fs-5"> জীবনধারা পরিবর্তন</span></h3>
+                {% elif language == 'as' %}
+                <h3>Lifestyle Modifications <br><span class="text-ai-2 fs-5"> জীৱনশৈলীৰ পৰিৱৰ্তন</span></h3>
+                {% elif language == 'sa' %}
+                <h3>Lifestyle Modifications <br><span class="text-ai-2 fs-5">Jiban Dhaam Thekeh'n Bhera</span></h3>
+                {% elif language == 'ur' %}
+                <h3>Lifestyle Modifications <br><span class="text-ai-2 fs-5"> طرز زندگی میں تبدیلیاں</span></h3>
+                {% elif language == 'ta' %}
+                <h3>Lifestyle Modifications <br><span class="text-ai-2 fs-5"> வாழ்க்கை முறை மாற்றங்கள்</span></h3>
+                {% elif language == 'di' %}
+                <h3>Lifestyle Modifications <br><span class="text-ai-2 fs-5"> जीवन शैली च बदलाव</span></h3>
+                {% elif language == 'kn' %}
+                <h3>Lifestyle Modifications <br><span class="text-ai-2 fs-5"> ಜೀವನಶೈಲಿ ಮಾರ್ಪಾಡುಗಳು</span></h3>
+                {% elif language == 'si' %}
+                <h3>Lifestyle Modifications <br><span class="text-ai-2 fs-5"> طرز زندگي ۾ تبديليون</span></h3>
+                {% else %}
+                <h3>Lifestyle Modifications</span></h3>
+                {% endif %}
+              </div>
+              <div class="solu_description">
+                <p>{{ list_outputs.6 }}</p>
+                <button type="button" class="read_more_btn">Read More</button>
+              </div>
+            </div>
+            <div class="solution_card">
+              <div class="hover_color_bubble"></div>
+              <div class="so_top_icon">
+                <img
+                  src="{% static 'img/smoking-svgrepo-com.svg' %}"
+                  alt="medical_test"
+                  class="img-fluid"
+                />
+              </div>
+              <div class="solu_title">
+                {% if language == 'hi' %}
+                <h3>Smoking and Alcohol Impact <br><span class="text-ai-2 fs-5"> धूम्रपान और शराब का प्रभाव</span></h3>
+                {% elif language == 'bn' %}
+                <h3>Smoking and Alcohol Impact <br><span class="text-ai-2 fs-5"> ধূমপান এবং অ্যালকোহল প্রভাব</span></h3>
+                {% elif language == 'as' %}
+                <h3>Smoking and Alcohol Impact <br><span class="text-ai-2 fs-5"> ধূমপান আৰু মদ্যপানৰ প্ৰভাৱ</span></h3>
+                {% elif language == 'sa' %}
+                <h3>Smoking and Alcohol Impact <br><span class="text-ai-2 fs-5">Jahera aar Nueng Disom</span></h3>
+                {% elif language == 'ur' %}
+                <h3>Smoking and Alcohol Impact <br><span class="text-ai-2 fs-5"> تمباکو نوشی اور الکحل کے اثرات </span></h3>
+                {% elif language == 'ta' %}
+                <h3>Smoking and Alcohol Impact <br><span class="text-ai-2 fs-5"> புகைபிடித்தல் மற்றும் ஆல்கஹால் பாதிப்பு</span></h3>
+                {% elif language == 'di' %}
+                <h3>Smoking and Alcohol Impact <br><span class="text-ai-2 fs-5"> धूम्रपान ते शराब दा असर</span></h3>
+                {% elif language == 'kn' %}
+                <h3>Smoking and Alcohol Impact <br><span class="text-ai-2 fs-5"> ಧೂಮಪಾನ ಮತ್ತು ಮದ್ಯದ ಪರಿಣಾಮ</span></h3>
+                {% elif language == 'si' %}
+                <h3>Smoking and Alcohol Impact <br><span class="text-ai-2 fs-5"> سگريٽ نوشي ۽ شراب جو اثر</span></h3>
+                {% else %}
+                <h3>Smoking and Alcohol Impact</span></h3>
+                {% endif %}
+              </div>
+              <div class="solu_description">
+                <p>{{ list_outputs.7 }}</p>
+                <button type="button" class="read_more_btn">Read More</button>
+              </div>
+            </div>
+            <div class="solution_card">
+              <div class="hover_color_bubble"></div>
+              <div class="so_top_icon">
+                <img
+                  src="{% static 'img/india-svgrepo-com (2).svg' %}"
+                  alt="medical_test"
+                  class="img-fluid"
+                />
+              </div>
+              <div class="solu_title">
+                {% if language == 'hi' %}
+                <h3>Comparison with General Indians <br><span class="text-ai-2 fs-5"> सामान्य भारतीयों से तुलना</span></h3>
+                {% elif language == 'bn' %}
+                <h3>Comparison with General Indians <br><span class="text-ai-2 fs-5"> সাধারণ ভারতীয়দের সাথে তুলনা</span></h3>
+                {% elif language == 'as' %}
+                <h3>Comparison with General Indians <br><span class="text-ai-2 fs-5"> সাধাৰণ ভাৰতীয়ৰ লগত তুলনা</span></h3>
+                {% elif language == 'ta' %}
+                <h3>Comparison with General Indians <br><span class="text-ai-2 fs-5"> பொது இந்தியர்களுடன் ஒப்பீடு</span></h3>
+                {% elif language == 'di' %}
+                <h3>Comparison with General Indians <br><span class="text-ai-2 fs-5"> जनरल इंडियन कन्नै तुलना</span></h3>
+                {% elif language == 'kn' %}
+                <h3>Comparison with General Indians <br><span class="text-ai-2 fs-5"> ಸಾಮಾನ್ಯ ಭಾರತೀಯರೊಂದಿಗೆ ಹೋಲಿಕೆ</span></h3>
+                {% elif language == 'si' %}
+                <h3>Comparison with General Indians <br><span class="text-ai-2 fs-5"> عام هندستانين سان مقابلو</span></h3>
+                {% else %}
+                <h3>Comparison with General Indians</span></h3>
+                {% endif %}
+              </div>
+              <div class="solu_description">
+                <p>{{ list_outputs.8 }}</p>
+                <button type="button" class="read_more_btn">Read More</button>
+              </div>
+            </div>
+            <div class="solution_card">
+              <div class="hover_color_bubble"></div>
+              <div class="so_top_icon">
+                <img
+                  src="{% static 'img/cardiogram-svgrepo-com.svg' %}"
+                  alt="medical_test"
+                  class="img-fluid"
+                />
+              </div>
+              <div class="solu_title">
+                {% if language == 'hi' %}
+                <h3>Abnormalities and Ambiguities <br><span class="text-ai-2 fs-5"> असामान्यताएं और अस्पष्टताएं</span></h3>
+                {% elif language == 'bn' %}
+                <h3>Abnormalities and Ambiguities <br><span class="text-ai-2 fs-5"> অস্বাভাবিকতা এবং অস্পষ্টতা</span></h3>
+                {% elif language == 'bn' %}
+                <h3>Abnormalities and Ambiguities<br><span class="text-ai-2 fs-5"> অস্বাভাবিকতা এবং অস্পষ্টতা</span></h3>
+                {% elif language == 'as' %}
+                <h3>Abnormalities and Ambiguities<br><span class="text-ai-2 fs-5"> অস্বাভাৱিকতা আৰু অস্পষ্টতা</span></h3>
+                {% elif language == 'ta' %}
+                <h3>Abnormalities and Ambiguities<br><span class="text-ai-2 fs-5"> அசாதாரணங்கள் மற்றும் தெளிவின்மை</span></h3>
+                {% elif language == 'sa' %}
+                <h3>Abnormalities and Ambiguities <br><span class="text-ai-2 fs-5"> Asonto aar Asthira Disom </span></h3>
+                {% elif language == 'ur' %}
+                <h3>Abnormalities and Ambiguities <br><span class="text-ai-2 fs-5"> غیر معمولیات اور ابہام</span></h3>
+                {% else %}
+                <h3>Abnormalities and Ambiguities</span></h3>
+                {% endif %}
+              </div>
+              <div class="solu_description">
+                <p>{{ list_outputs.8 }}</p>
+                <button type="button" class="read_more_btn">Read More</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

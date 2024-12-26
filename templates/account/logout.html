@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load allauth i18n %}
+{% block head_title %}
+    {% trans "Sign Out" %}
+{% endblock head_title %}
+{% block content %}
+
+<div class="px-4 py-5 my-1 text-center">
+    <img class="d-block mx-auto mb-4" src="{% static 'img/favicon2.png' %}" alt="" width="100">
+    <h1 class="display-5 fw-bold">Signout</h1>
+    <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">Are you sure you want to sign out? 
+    </div>
+    {% element form method="post" action=action_url no_visible_fields=True %}
+    {% slot body %}
+        {% csrf_token %}
+        {% if redirect_field_value %}
+            <input type="hidden"
+                    name="{{ redirect_field_name }}"
+                    value="{{ redirect_field_value }}" />
+        {% endif %}
+    {% endslot %}
+    {% slot actions %}
+        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+            <button type="submit" class="btn btn-primary btn-lg">Sign Out</button>
+        </div>
+    {% endslot %}
+    {% endelement %}
+    </div>
+    
+{% endblock content %}

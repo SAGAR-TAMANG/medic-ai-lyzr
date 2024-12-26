@@ -1,0 +1,106 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI</title>
+    <link rel="shortcut icon" href="{% static 'img/favicon2.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+  <body>
+    <div id="loading-screen">
+      <div class="loader">
+          <svg viewBox="0 0 80 80">
+              <circle id="test" cx="40" cy="40" r="32"></circle>
+          </svg>
+      </div>
+
+      <!-- Message Start -->
+      <div id="customToastContainer" class="custom-toast-container">
+        <div id="customToast" class="custom-toast">
+            <div class="custom-toast-body">
+                {{ message|safe }}
+            </div>
+            <button type="button" class="custom-close-btn" onclick="closeToast()">×</button>
+        </div>
+      </div>
+      
+      <div class="loader triangle">
+          <svg viewBox="0 0 86 80">
+              <polygon points="43 8 79 72 7 72"></polygon>
+          </svg>
+      </div>
+      
+      <div class="loader">
+          <svg viewBox="0 0 80 80">
+              <rect x="8" y="8" width="64" height="64"></rect>
+          </svg>
+      </div>
+    </div>
+    <div id="body-wrapper" style="display: none;">
+      <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 border-bottom">
+          <a href="/" class="d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+            <span class="fs-4"><img src="{% static 'img/favicon2.png' %}" class="border rounded-3" height="30px" alt=""> Medic AI Lyzr </span>
+          </a>
+    
+          <ul class="nav nav-pills">
+            <li class="nav-item"><a href="{% url 'main' %}" class="nav-link" aria-current="page">Home</a></li>
+            <li class="nav-item"><a href="#" class="nav-link" onclick="event.preventDefault(); showToast('Feature coming soon!', 4000)">Login</a></li>
+            <li class="nav-item"><a href="#" class="nav-link active" onclick="event.preventDefault(); showToast('Feature coming soon!', 4000)">Signup</a></li>
+          </ul>
+        </header>
+      </div>
+    
+      {% block content %} {% endblock %}
+      
+      <div class="container">
+        <footer class="py-3 my-4">
+          <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item"><a href="{% url 'main' %}" class="nav-link px-2 text-body-secondary">Home</a></li>
+            <li class="nav-item"><a href="{% url 'main' %}" class="nav-link px-2 text-body-secondary">FAQs</a></li>
+          </ul>
+          <p class="text-center text-body-secondary">&copy; 2025 MEDIC AI</p>
+        </footer>
+      </div>
+    </div>
+
+    <script>
+      function showToast(message, duration = 5000) {
+        var toast = document.getElementById('customToast');
+        var container = document.getElementById('customToastContainer');
+    
+        // Update the message
+        toast.querySelector('.custom-toast-body').innerText = message;
+    
+        // Show the toast
+        container.style.bottom = '0';
+        container.style.transition = 'bottom 0.5s ease-out';
+    
+        // Hide the toast after the specified duration
+        setTimeout(() => {
+            container.classList.add('fade-out');
+            setTimeout(() => {
+                container.style.bottom = '-100px';
+            }, 500);
+        }, duration);
+    }
+    
+    function closeToast() {
+        var container = document.getElementById('customToastContainer');
+        container.classList.add('fade-out');
+        setTimeout(() => {
+            container.style.bottom = '-100px';
+        }, 500);
+    }
+    </script>
+    <script src="https://kit.fontawesome.com/c2b581aad2.js" crossorigin="anonymous"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+  </body>
+</html>

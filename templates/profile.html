@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if user.is_authenticated %}
+{% if language %}
+<div class="alert alert-success w-50 m-auto mt-1 text-center p-2" role="alert">
+  Your current language is {{ language }}
+</div>
+{% endif %}
+
+<div class="container p-0">
+  <h1 class="h3 mb-3">Profile</h1>
+  <div class="row">
+      <div class="col-md-5 col-xl-4">
+
+          <div class="card">
+              <div class="card-header">
+                  <h5 class="card-title mb-0">Profile Settings</h5>
+              </div>
+
+              <div class="list-group list-group-flush" role="tablist">
+                  <a class="list-group-item list-group-item-action active" data-toggle="list" href="#account" role="tab">
+                    Profile
+                  </a>
+                  <a class="list-group-item list-group-item-action" data-toggle="list" href="{% url 'logout' %}" role="tab">
+                    Sign Out
+                  </a>
+              </div>
+          </div>
+      </div>
+
+      <div class="col-md-7 col-xl-8">
+          <div class="tab-content">
+              <div class="tab-pane fade show active" id="account" role="tabpanel">
+                <div class="card">
+                    <div class="card-header">
+                      <h5 class="card-title mb-0 p-2">Your Profile</h5>
+                      </div>
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-md-7">
+                            <div class="border rounded p-2">
+                              <div class="fs-6">
+                                Username
+                              </div>
+                              <div class="fs-3 text-primary">
+                                {{ user }}
+                              </div>
+                            </div>
+                            <div class="border rounded p-2 mt-2">
+                              <div class="fs-6">
+                                Email
+                              </div>
+                              <div class="fs-3 text-primary">
+                                {{ user.email }}
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="text-center">
+                              <img alt="Andrew Jones" src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle img-responsive mt-2" width="128" height="128">
+                              <div class="mt-2">
+                                <span class="btn btn-primary"><i class="fa fa-upload"></i></span>
+                              </div>
+                              <small>For best results, use an image at least 128px by 128px in .jpg format</small>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="card my-2">
+                      <div class="card-header">
+                          <h5 class="card-title mb-0 p-2">Language Settings</h5>
+                      </div>
+                      <div class="card-body">
+                        <form method="post" action="{% url 'profile' %}">
+                          {% csrf_token %}
+                          <div class="list-group list-group-checkable d-grid gap-2 border-0">
+                            {% if language == "English" %}
+                            <label class="list-group-item rounded-3 py-3 bg-primary text-white" for="englishRadio">
+                            {% else %}
+                            <label class="list-group-item rounded-3 py-3" for="englishRadio">
+                            {% endif %}
+                              <input class="list-group-item-check pe-none" type="radio" name="language" id="englishRadio" value="en">
+                              English (en)
+                              <span class="d-block small opacity-50">Select English as the output language.</span>
+                            </label>
+                        
+                            {% if language == "Hindi" %}
+                            <label class="list-group-item rounded-3 py-3 bg-primary text-white" for="hindiRadio">
+                            {% else %}
+                            <label class="list-group-item rounded-3 py-3" for="hindiRadio">
+                            {% endif %}
+                              <input class="list-group-item-check pe-none" type="radio" name="language" id="hindiRadio" value="hi">
+                              Hindi (hi)
+                              <span class="d-block small opacity-50">Select Hindi as your output language.</span>
+                            </label>
+                        
+                            {% if language == "Bengali" %}
+                            <label class="list-group-item rounded-3 py-3 bg-primary text-white" for="bengaliRadio">
+                              {% else %}
+                            <label class="list-group-item rounded-3 py-3" for="bengaliRadio">
+                            {% endif %}
+                              <input class="list-group-item-check pe-none" type="radio" name="language" id="bengaliRadio" value="bn">
+                              Bengali (bn)
+                              <span class="d-block small opacity-50">Select Bengali as your output language.</span>
+                            </label>
+                        
+                            {% if language == "Assamese" %}
+                            <label class="list-group-item rounded-3 py-3 bg-primary text-white" for="assameseRadio">
+                            {% else %}
+                            <label class="list-group-item rounded-3 py-3" for="assameseRadio">
+                            {% endif %}
+                              <input class="list-group-item-check pe-none" type="radio" name="language" id="assameseRadio" value="as">
+                              Assamese (as)
+                              <span class="d-block small opacity-50">Select Assamese as your output language.</span>
+                            </label>
+                        
+                            {% if language == "Dogri" %}
+                            <label class="list-group-item rounded-3 py-3 bg-primary text-white" for="dogriRadio">
+                            {% else %}
+                            <label class="list-group-item rounded-3 py-3" for="dogriRadio">
+                            {% endif %}
+                              <input class="list-group-item-check pe-none" type="radio" name="language" id="dogriRadio" value="di">
+                              Dogri (di)
+                              <span class="d-block small opacity-50">Select Dogri as your output language.</span>
+                            </label>
+                        
+                            {% if language == "Kannada" %}
+                            <label class="list-group-item rounded-3 py-3 bg-primary text-white" for="kannadaRadio">
+                            {% else %}
+                            <label class="list-group-item rounded-3 py-3" for="kannadaRadio">
+                            {% endif %}
+                              <input class="list-group-item-check pe-none" type="radio" name="language" id="kannadaRadio" value="kn">
+                              Kannada (kn)
+                              <span class="d-block small opacity-50">Select Kannada as your output language.</span>
+                            </label>
+                        
+                            {% if language == "Sindhi" %}
+                            <label class="list-group-item rounded-3 py-3 bg-primary text-white" for="sindhiRadio">
+                            {% else %}
+                            <label class="list-group-item rounded-3 py-3" for="sindhiRadio">
+                            {% endif %}
+                              <input class="list-group-item-check pe-none" type="radio" name="language" id="sindhiRadio" value="si">
+                              Sindhi (si)
+                              <span class="d-block small opacity-50">Select Sindhi as your output language.</span>
+                            </label>
+                        
+                            {% if language == "Santali" %}
+                            <label class="list-group-item rounded-3 py-3 bg-primary text-white" for="santaliRadio">
+                            {% else %}
+                            <label class="list-group-item rounded-3 py-3" for="santaliRadio">
+                            {% endif %}
+                              <input class="list-group-item-check pe-none" type="radio" name="language" id="santaliRadio" value="sa">
+                              Santali (sa)
+                              <span class="d-block small opacity-50">Select santaliRadio as your output language.</span>
+                            </label>
+                        
+                            {% if language == "Urdu" %}
+                            <label class="list-group-item rounded-3 py-3 bg-primary text-white" for="urduRadio">
+                            {% else %}
+                            <label class="list-group-item rounded-3 py-3" for="urduRadio">
+                            {% endif %}
+                              <input class="list-group-item-check pe-none" type="radio" name="language" id="urduRadio" value="ur">
+                              Urdu (ur)
+                              <span class="d-block small opacity-50">Select Urdu as your output language.</span>
+                            </label>
+                        
+                            {% if language == "Tamil" %}
+                            <label class="list-group-item rounded-3 py-3 bg-primary text-white" for="tamilRadio">
+                            {% else %}
+                            <label class="list-group-item rounded-3 py-3" for="tamilRadio">
+                            {% endif %}
+                              <input class="list-group-item-check pe-none" type="radio" name="language" id="tamilRadio" value="ta">
+                              Tamil (ta)
+                              <span class="d-block small opacity-50">Select Tamil as your output language.</span>
+                            </label>
+                        
+                            {% if language == "Nepali" %}
+                            <label class="list-group-item rounded-3 py-3 bg-primary text-white" for="nepaliRadio">
+                            {% else %}
+                            <label class="list-group-item rounded-3 py-3" for="nepaliRadio">
+                            {% endif %}
+                            <input class="list-group-item-check pe-none" type="radio" name="language" id="nepaliRadio" value="np">
+                            Nepali (np) 
+                            <span class="d-block small opacity-50">Select Nepali as your output language.</span>
+                            </label>
+                        
+                            {% if language == "Gujarati" %}
+                            <label class="list-group-item rounded-3 py-3 bg-primary text-white" for="gujaratiRadio">
+                            {% else %}
+                            <label class="list-group-item rounded-3 py-3" for="gujaratiRadio">
+                            {% endif %}
+                            <input class="list-group-item-check pe-none" type="radio" name="language" id="gujaratiRadio" value="gj">
+                            Gujarati (gj) 
+                            <span class="d-block small opacity-50">Select Gujarati as your output language.</span>
+                            </label>
+                          </div>
+                          <button type="submit" class="btn btn-primary w-100 mt-2">Save</button>
+                        </form>
+
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+      </div>
+  </div>
+
+</div>
+
+
+{% else %}
+
+{% endif %}
+
+
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load allauth %}
+{% load static %}
+
+{% block content %}
+
+<div class="px-4 py-5 my-1 text-center">
+  <img class="d-block mx-auto mb-4" src="{% static 'img/favicon2.png' %}" alt="" width="100">
+  <h1 class="display-5 fw-bold">Please verify your email</h1>
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4">We have sent an email to you for verification. Follow the link provided to finalize the signup process. If you do not see the verification email in your main inbox, check your spam folder. 
+  </div>
+</div>
+
+
+{% endblock content %}
