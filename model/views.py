@@ -179,7 +179,7 @@ api_ocr = os.getenv("OCR_API_KEY")
 def extract_text_from_imageandpdf(url):
     # print("URL:", f"https://medic-ai-lyzr.feynmanpi.com/media/{image_path}")
     print("URL:", url)
-    response = requests.get(f"https://api.ocr.space/parse/imageurl?apikey={api_ocr}&url={url}")
+    response = requests.get(f"https://api.ocr.space/parse/imageurl?apikey={api_ocr}&url=https://medic-ai-lyzr.feynmanpi.com/media/{url}")
     print("RESPONSE", response)
     content = response.json()
     # Extract text details
