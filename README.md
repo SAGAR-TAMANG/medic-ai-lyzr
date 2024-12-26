@@ -29,14 +29,14 @@
   <p align="center">
     An AI powered medical reports summarizer for novice & non-doctors.
     <br />
-    <a href="https://github.com/SAGAR-TAMANG/medic-report-ai/README.md"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/SAGAR-TAMANG/medic-ai-lyzr/README.md"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <!-- <a href="https://github.com/github_username/repo_name">View Demo</a> -->
     <!-- · -->
-    <a href="https://github.com/SAGAR-TAMANG/medic-report-ai/issues">Report Bug</a>
+    <a href="https://github.com/SAGAR-TAMANG/medic-ai-lyzr/issues">Report Bug</a>
     ·
-    <a href="https://github.com/SAGAR-TAMANG/medic-report-ai/issues">Request Feature</a>
+    <a href="https://github.com/SAGAR-TAMANG/medic-ai-lyzr/issues">Request Feature</a>
   </p>
 </div>
 
@@ -133,7 +133,7 @@ In order to run this app, follow these criterias.
 - [x] Implement Take Picture button
 - [x] Deploy the app
 
-See the [open issues](https://github.com/SAGAR-TAMANG/medic-report-ai/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/SAGAR-TAMANG/medic-ai-lyzr/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -171,7 +171,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Sagar Tamang - [@LinkedIn](https://www.linkedin.com/in/sagar-tmg/) - cs22bcagn033@kazirangauniversity.in
 
-Project Link: [https://github.com/SAGAR-TAMANG/medic-report-ai](https://github.com/SAGAR-TAMANG/medic-report-ai)
+Project Link: [https://github.com/SAGAR-TAMANG/medic-ai-lyzr](https://github.com/SAGAR-TAMANG/medic-ai-lyzr)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -190,15 +190,15 @@ Project Link: [https://github.com/SAGAR-TAMANG/medic-report-ai](https://github.c
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/SAGAR-TAMANG/medic-report-ai.svg?style=for-the-badge
-[contributors-url]: https://github.com/SAGAR-TAMANG/medic-report-ai/graphs/contributors
+[contributors-url]: https://github.com/SAGAR-TAMANG/medic-ai-lyzr/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/SAGAR-TAMANG/medic-report-ai.svg?style=for-the-badge
-[forks-url]: https://github.com/SAGAR-TAMANG/medic-report-ai/network/members
+[forks-url]: https://github.com/SAGAR-TAMANG/medic-ai-lyzr/network/members
 [stars-shield]: https://img.shields.io/github/stars/SAGAR-TAMANG/medic-report-ai.svg?style=for-the-badge
-[stars-url]: https://github.com/SAGAR-TAMANG/medic-report-ai/stargazers
+[stars-url]: https://github.com/SAGAR-TAMANG/medic-ai-lyzr/stargazers
 [issues-shield]: https://img.shields.io/github/issues/SAGAR-TAMANG/medic-report-ai.svg?style=for-the-badge
-[issues-url]: https://github.com/SAGAR-TAMANG/medic-report-ai/issues
+[issues-url]: https://github.com/SAGAR-TAMANG/medic-ai-lyzr/issues
 [license-shield]: https://img.shields.io/github/license/SAGAR-TAMANG/medic-report-ai.svg?style=for-the-badge
-[license-url]: https://github.com/SAGAR-TAMANG/medic-report-ai/LICENSE.txt
+[license-url]: https://github.com/SAGAR-TAMANG/medic-ai-lyzr/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/sagar-tmg/
 [product-screenshot]: static/img/screenshot.png
