@@ -260,7 +260,7 @@ def generate_health_suggestions_lyzr(extracted_text):
     
     headers = {
         'Content-Type': 'application/json',
-        'x-api-key': 'sk-default-QisHUr8meLmfZdghTUD33VMKxvUiMOvZ',
+        'x-api-key': os.getenv("LYZR_API_KEY"),
     }
 
     data = {
