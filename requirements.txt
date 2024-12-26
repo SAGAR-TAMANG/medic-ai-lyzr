@@ -1,15 +1,10 @@
 Django==4.2.3
 django_allauth==0.55.0
-PyMuPDF==1.25.1
 gtts==2.5.4
-opencv_python==4.9.0.80
 protobuf==5.29.2
-pytesseract==0.3.10
 python-dotenv==1.0.1
 Requests==2.32.3
 django-cleanup==9.0.0
 psycopg2==2.9.10
 gunicorn==23.0.0
 opencv-python==4.9.0.80
-PyQt5
-opencv-python-headless

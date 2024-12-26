@@ -9,16 +9,11 @@ from django.http import JsonResponse
 import time
 import os
 import re
-import fitz # PyMuPDF
-import pytesseract
-import cv2
 from dotenv import load_dotenv
 from gtts import gTTS
 
 # Set up OpenAI API key
 load_dotenv()
-
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 def index_poster(request):
     context = {}
@@ -42,9 +37,9 @@ def index_poster(request):
         print("\n Contexts \n", context, "\n")
 
         if file_extension in ('.png', '.jpg', '.jpeg', '.heic', '.webp'):
-            extracted_text = extract_text_from_image(os.path.join(settings.MEDIA_ROOT, name))
+            extracted_text = extract_text_from_imageandpdf(name)
         elif file_extension == '.pdf':
-            extracted_text = extract_text_from_pdf(os.path.join(settings.MEDIA_ROOT, name))
+            extracted_text = extract_text_from_imageandpdf(name)
         else:
             extracted_text = 'Not a correct extension'
 
@@ -84,14 +79,12 @@ def index_poster(request):
         try:
             print("English Language Selected")
             context['language'] = "en"
-            # health_suggestions = generate_health_suggestions_gemini(extracted_text)
             health_suggestions = generate_health_suggestions_lyzr(extracted_text)
             audio = generate_audio(health_suggestions, "en")
             context['audio'] = audio
         except Exception as e:
             print("Exception at Lang", e)
             print("English Language Selected (Default) - 2")
-            # health_suggestions = generate_health_suggestions_gemini(extracted_text)
             health_suggestions = generate_health_suggestions_lyzr(extracted_text)
 
         context['extracted_text'] = extracted_text
@@ -165,95 +158,26 @@ def get_file_extension(file_name):
 
 ## Image Processing 
 
-def extract_text_from_image(image_path):
-        image = cv2.imread(image_path)
-        image = remove_line(image)
+import requests
 
-        threshold_img = pre_processing(image)
+api_ocr = os.getenv("OCR_API_KEY")
+
+def extract_text_from_imageandpdf(image_path):
+    print("URL:", f"https://medic-ai-lyzr.feynmanpi.com/media/{image_path}")
+    response = requests.get(f"https://api.ocr.space/parse/imageurl?apikey={api_ocr}&url=https://medic-ai-lyzr.feynmanpi.com/media/{image_path}")
+    print("RESPONSE", response)
+    content = response.json()
+    # Extract text details
+    try:
+        parsed_results = content.get("ParsedResults", [])
+        if not parsed_results:
+            return "No text found in the image."
         
-        tesseract_config = r'--oem 3 --psm 6'
-        text = pytesseract.image_to_string(threshold_img, config=tesseract_config, lang='eng')
-
+        # Extract text from ParsedResults
+        text = "\n".join(result.get("ParsedText", "") for result in parsed_results)
         return text
-
-def extract_text_from_pdf(pdf_path):
-
-    pdf_document = fitz.open(pdf_path)
-    output = ""
-
-    for page_number in range(pdf_document.page_count):
-        page = pdf_document.load_page(page_number)
-        
-        text = page.get_text()
-        
-        output += text
-    
-    if (output.strip() == ""):
-            for page_number in range(pdf_document.page_count):
-                page = pdf_document.load_page(page_number)
-
-                image_list = page.get_pixmap()
-
-                # Generate a unique image path
-                image_path = f"{pdf_path}_page_{page_number + 1}_img_.png"
-
-                # Save the image
-                image_list.save(image_path)
-
-                # Extract text from the image and append it to the output
-                text = extract_text_from_image(image_path)
-                output += text + "\n"
-
-    pdf_document.close()
-    
-    return output
-
-def check_image_ratio(image):
-    height, width, _ = image.shape
-    if height > width:
-        image = cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE)
-    return image
-
-def remove_line(image):
-        removed = image.copy()
-        gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-        thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)[1]
-        
-        # Remove vertical lines
-        vertical_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (1,40))
-        remove_vertical = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, vertical_kernel, iterations=2)
-        cnts = cv2.findContours(remove_vertical, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        cnts = cnts[0] if len(cnts) == 2 else cnts[1]
-        for c in cnts:
-            cv2.drawContours(removed, [c], -1, (255,255,255), 15)
-
-        # Remove horizontal lines
-        horizontal_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (40,1))
-        remove_horizontal = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, horizontal_kernel, iterations=2)
-        cnts = cv2.findContours(remove_horizontal, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        cnts = cnts[0] if len(cnts) == 2 else cnts[1]
-        for c in cnts:
-            cv2.drawContours(removed, [c], -1, (255,255,255), 5)
-
-        # Repair kernel
-        repair_kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3,3))
-        removed = 255 - removed
-        dilate = cv2.dilate(removed, repair_kernel, iterations=5)
-        dilate = cv2.cvtColor(dilate, cv2.COLOR_BGR2GRAY)
-        pre_result = cv2.bitwise_and(dilate, thresh)
-
-        result = cv2.morphologyEx(pre_result, cv2.MORPH_CLOSE, repair_kernel, iterations=5)
-        final = cv2.bitwise_and(result, thresh)
-
-        invert_final = 255 - final
-        
-        normal_image = cv2.cvtColor(invert_final,cv2.COLOR_GRAY2BGR)
-        return normal_image
-
-def pre_processing(image):
-        gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        threshold_img = cv2.threshold(gray_image, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)[-1]
-        return threshold_img
+    except KeyError as e:
+        return f"Error in parsing OCR response: {str(e)}"
 
 def generate_health_suggestions_lyzr(extracted_text):
     url = 'https://agent-prod.studio.lyzr.ai/v3/inference/chat/'
