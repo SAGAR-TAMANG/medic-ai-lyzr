@@ -12,9 +12,7 @@ import re
 import fitz # PyMuPDF
 import pytesseract
 import cv2
-
 from user.models import UserProfile
-from openai import OpenAI
 from dotenv import load_dotenv
 from gtts import gTTS
 
@@ -53,6 +51,37 @@ def index_poster(request):
 
         print("\n Extracted Text:", extracted_text, '\n')
         
+        try:
+            print("English Language Selected")
+            context['language'] = "en"
+            # health_suggestions = generate_health_suggestions_gemini(extracted_text)
+            health_suggestions = generate_health_suggestions_lyzr(extracted_text)
+            audio = generate_audio(health_suggestions, "en")
+            context['audio'] = audio
+        except Exception as e:
+            print("Exception at Lang", e)
+            print("English Language Selected (Default) - 2")
+            # health_suggestions = generate_health_suggestions_gemini(extracted_text)
+            health_suggestions = generate_health_suggestions_lyzr(extracted_text)
+
+        context['extracted_text'] = extracted_text
+        context['health_suggestions'] = health_suggestions
+
+        list_of_output = text_division_gemini(health_suggestions)
+        
+        context['list_outputs'] = list_of_output
+        
+        if isinstance(health_suggestions, str):
+            print("TRUE IT's A TEXT")
+            return render(request, 'output.html', context)
+        else:
+            print("Not a text")
+        
+        return render(request, 'index.html', context)
+
+    if request.method == 'POST':
+        extracted_text = request.POST.get("search_space")
+        print("INPUT: ", extracted_text)
         try:
             print("English Language Selected")
             context['language'] = "en"
