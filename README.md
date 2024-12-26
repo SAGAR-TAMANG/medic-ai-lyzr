@@ -189,15 +189,15 @@ Project Link: [https://github.com/SAGAR-TAMANG/medic-ai-lyzr](https://github.com
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/SAGAR-TAMANG/medic-report-ai.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/SAGAR-TAMANG/medic-ai-lyzr.svg?style=for-the-badge
 [contributors-url]: https://github.com/SAGAR-TAMANG/medic-ai-lyzr/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/SAGAR-TAMANG/medic-report-ai.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/SAGAR-TAMANG/medic-ai-lyzr.svg?style=for-the-badge
 [forks-url]: https://github.com/SAGAR-TAMANG/medic-ai-lyzr/network/members
-[stars-shield]: https://img.shields.io/github/stars/SAGAR-TAMANG/medic-report-ai.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/SAGAR-TAMANG/medic-ai-lyzr.svg?style=for-the-badge
 [stars-url]: https://github.com/SAGAR-TAMANG/medic-ai-lyzr/stargazers
-[issues-shield]: https://img.shields.io/github/issues/SAGAR-TAMANG/medic-report-ai.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/SAGAR-TAMANG/medic-ai-lyzr.svg?style=for-the-badge
 [issues-url]: https://github.com/SAGAR-TAMANG/medic-ai-lyzr/issues
-[license-shield]: https://img.shields.io/github/license/SAGAR-TAMANG/medic-report-ai.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/SAGAR-TAMANG/medic-ai-lyzr.svg?style=for-the-badge
 [license-url]: https://github.com/SAGAR-TAMANG/medic-ai-lyzr/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/sagar-tmg/
