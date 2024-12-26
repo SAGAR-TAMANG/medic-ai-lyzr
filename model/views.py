@@ -12,7 +12,6 @@ import re
 import fitz # PyMuPDF
 import pytesseract
 import cv2
-from user.models import UserProfile
 from dotenv import load_dotenv
 from gtts import gTTS
 
