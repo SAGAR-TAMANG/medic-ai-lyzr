@@ -9,3 +9,4 @@ python-dotenv==1.0.1
 Requests==2.32.3
 django-cleanup==9.0.0
 psycopg2==2.9.10
+gunicorn==23.0.0
