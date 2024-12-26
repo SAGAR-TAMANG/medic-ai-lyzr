@@ -1,6 +1,6 @@
 Django==4.2.3
 django_allauth==0.55.0
-fitz==0.0.1.dev2
+PyMuPDF==1.25.1
 gtts==2.5.4
 opencv_python==4.9.0.80
 protobuf==5.29.2
